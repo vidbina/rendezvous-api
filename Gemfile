@@ -5,8 +5,12 @@ ruby '2.0.0'
 group :development do
   gem 'rspec'
   gem 'rack-test'
+  gem 'fakeredis'
+end
+
+group :production do
+  gem 'redis'
 end
 
 gem 'sinatra'
-gem 'mongo'
-gem 'bson_ext'
+gem 'sinatra-contrib'
