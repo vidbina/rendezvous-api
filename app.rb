@@ -48,10 +48,12 @@ class RendezvousApi < Sinatra::Base
   get '/send_messages' do
     begin
       NexmoMessenger.new(ENV['NEXMO_KEY'], ENV['NEXMO_SECRET']).broadcast_encounter(
-        event: "Let's grab some drinks",
-        location: "X",
-        time: "next week"
+        from: "the rendezvous api",
+        what: "Let's grab some drinks",
+        where: "X",
+        when: "next week"
       )
+      json msg: "messages sent"
     rescue
       json error: 500
     end

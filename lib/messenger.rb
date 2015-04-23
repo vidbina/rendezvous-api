@@ -2,6 +2,8 @@ class Messenger
 end
 
 class NexmoMessenger < Messenger
+  require 'nexmo'
+
   def initialize(key, secret)
     @key = key
     @secret = secret
@@ -14,14 +16,18 @@ class NexmoMessenger < Messenger
     end
   end
 
-  def broadcast_encounter(params)
-    numbers = ['686136392', '0618345454', '0619168586']
+  def broadcast_encounter(data)
+    numbers = ['+31686136392', '+31619168586'] #, '+31618345454'
     numbers.each do |number|
-      @client.send_message(
+      p data
+      msg = {
         to: number,
+        from: "the rendezvous api",
         type: 'text',
-        text: "#{params[:what]} at #{params[:where]} #{params[:when]}. I've opted some dates https://api.example.com/#{SecureRandom.hex}"
-      )
+        text: "#{data[:what]} at #{data[:where]} #{data[:when]}. I've opted some dates https://api.example.com/#{SecureRandom.hex}"
+      }
+      p msg
+      @client.send_message(msg)
     end
   end
 end
