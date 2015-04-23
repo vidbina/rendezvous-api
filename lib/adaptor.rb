@@ -4,7 +4,7 @@ class RedisAdaptor
     @redis = redis
   end
 
-  def save_if_nonexistent(id, val)
+  def save_if_nonexistent(id, val, ttl=nil)
     if val.kind_of? Hash
       if !@redis.exists? id
         (true if @redis.hmset(id, val.each.map{ |k, v| [k, v] }.flatten) == "OK") or false
@@ -16,7 +16,7 @@ class RedisAdaptor
     end
   end
 
-  def save_and_possibly_overwrite(id, val)
+  def save_and_possibly_overwrite(id, val, ttl=nil)
     if val.kind_of? Hash
       arr = *val.each.map{ |k, v| [k, v] }.flatten
       res = @redis.hmset(id, arr)

@@ -9,5 +9,6 @@ group :development do
 end
 
 gem 'sinatra'
+gem 'sinatra-contrib'
 gem 'mongo'
 gem 'bson_ext'
