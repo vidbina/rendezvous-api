@@ -26,6 +26,11 @@ describe 'Redis Adaptor' do
     expect(adaptor.get('something')).to eq('Westergasfabriek')
   end
 
+  it "saves hashes" do
+    expect(adaptor.save_and_possibly_overwrite('a_hash', { who: "Bob", where: "fabriek" })).to eq(true)
+    expect(adaptor.get('a_hash')).to eq({ 'who' => 'Bob', 'where' => 'fabriek' })
+  end
+
   context "used under the Persistence layer" do
     let(:storage) { Persistence.new(adaptor) }
 
@@ -37,6 +42,11 @@ describe 'Redis Adaptor' do
     it "does not overwrite saved items" do
       expect(storage.save('untouchable', 'demon')).to be(true)
       expect(storage.save('untouchable', 'angel', overwrite=false)).to be(false)
+    end
+
+    it "properly handles hash saving and retrieval" do
+      expect(storage.save('hashable', { name: 'conrad' })).to be(true)
+      expect(storage.get('hashable')).to eq({ 'name' => 'conrad' })
     end
   end
 end
