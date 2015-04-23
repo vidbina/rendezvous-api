@@ -8,7 +8,9 @@ group :development do
   gem 'fakeredis'
 end
 
+group :production do
+  gem 'redis'
+end
+
 gem 'sinatra'
 gem 'sinatra-contrib'
-gem 'mongo'
-gem 'bson_ext'
