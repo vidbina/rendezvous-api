@@ -18,20 +18,29 @@ class RendezvousApi < Sinatra::Base
   post '/encounters' do
     source = params
     id = nil
-    3.times do
-      id = SecureRandom.hex
-      store.save("encounter:#{id}", {
-        email: source[:email],
-        title: source[:title],
-        date:  source[:date],
-        location: source[:location],
-        members: source[:members]
-      }, ttl=3600)
+    begin
+      3.times do
+        id = SecureRandom.hex
+        p "members are #{source[:members]}"
+        store.save("encounter:#{id}", {
+          email: source[:email],
+          title: source[:title],
+          date:  source[:date],
+          location: source[:location],
+          members: source[:members].join(',')
+        }, ttl=3600)
+      end
+      json id: id
+    rescue => e
+      json error: 500, msg: 'i just shat myself'
     end
-    json id: id
   end
 
   get '/encounters/:id' do
-    json store.get("encounter:#{params[:id]}")
+    begin
+      json store.get("encounter:#{params[:id]}")
+    rescue => e
+      json error: 500, msg: 'sloppy work on my end, sawry'
+    end
   end
 end

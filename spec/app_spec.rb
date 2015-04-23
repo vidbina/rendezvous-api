@@ -8,13 +8,13 @@ describe "Rendezvous API" do
   end
 
   it "should allow creation encounters" do
-    post '/encounters', { name: 'Lunch', token: '', friends: ['as@bina.me']}
+    post '/encounters', { name: 'Lunch', location: 'here', date: 'tomorrow', members: ['as@bina.me']}
     expect(last_response).to be_ok
     p(last_response.body)
   end
 
   it "should allow recall of encounters" do
-    post '/encounters', { what: 'Gino is coding' }
+    post '/encounters', { name: 'gribblehack', members: ['gino', 'frank', 'lennart', 'steven'] }
     id = JSON.parse(last_response.body)["id"]
     get "/encounters/#{id}"
     expect(last_response).to be_ok
