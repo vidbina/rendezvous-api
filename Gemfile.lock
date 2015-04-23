@@ -5,6 +5,8 @@ GEM
     bson_ext (1.12.1)
       bson (~> 1.12.1)
     diff-lcs (1.2.5)
+    fakeredis (0.5.0)
+      redis (~> 3.0)
     mongo (1.12.1)
       bson (= 1.12.1)
     rack (1.6.0)
@@ -12,6 +14,7 @@ GEM
       rack
     rack-test (0.6.3)
       rack (>= 1.0)
+    redis (3.2.1)
     rspec (3.2.0)
       rspec-core (~> 3.2.0)
       rspec-expectations (~> 3.2.0)
@@ -36,6 +39,7 @@ PLATFORMS
 
 DEPENDENCIES
   bson_ext
+  fakeredis
   mongo
   rack-test
   rspec
