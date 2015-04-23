@@ -5,7 +5,7 @@ require File.expand_path '../lib/persistence.rb', __FILE__
 require File.expand_path '../lib/adaptor.rb', __FILE__
 
 class RendezvousApi < Sinatra::Base
-  store = Persistence.new(RedisAdaptor.new(nil, Redis.new))
+  store = Persistence.new(RedisAdaptor.new(nil, Redis.new(url: ENV['REDIS_URL'])))
 
   get '/' do
     'Let\'s rendezvous'
