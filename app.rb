@@ -3,6 +3,7 @@ require 'sinatra/json'
 
 require File.expand_path '../lib/persistence.rb', __FILE__
 require File.expand_path '../lib/adaptor.rb', __FILE__
+require File.expand_path '../lib/messenger.rb', __FILE__
 
 class RendezvousApi < Sinatra::Base
   store = Persistence.new(RedisAdaptor.new(nil, Redis.new(url: ENV['REDIS_URL'])))
@@ -41,6 +42,11 @@ class RendezvousApi < Sinatra::Base
       json store.get("encounter:#{params[:id]}")
     rescue => e
       json error: 500, msg: 'sloppy work on my end, sawry'
+    end
+  end
+
+  get '/send_messages' do
+    begin
     end
   end
 end

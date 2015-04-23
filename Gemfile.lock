@@ -6,6 +6,7 @@ GEM
     fakeredis (0.5.0)
       redis (~> 3.0)
     multi_json (1.11.0)
+    nexmo (3.0.0)
     rack (1.6.0)
     rack-protection (1.5.3)
       rack
@@ -43,6 +44,7 @@ PLATFORMS
 
 DEPENDENCIES
   fakeredis
+  nexmo
   rack-test
   redis
   rspec
