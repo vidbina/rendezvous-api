@@ -29,6 +29,14 @@ describe 'Redis Adaptor' do
   context "used under the Persistence layer" do
     let(:storage) { Persistence.new(adaptor) }
 
-    it ""
+    it "saves items" do
+      expect(storage.save('city', 'Amsterdam')).to be(true)
+      expect(storage.get('city')).to eq('Amsterdam')
+    end
+
+    it "does not overwrite saved items" do
+      expect(storage.save('untouchable', 'demon')).to be(true)
+      expect(storage.save('untouchable', 'angel', overwrite=false)).to be(false)
+    end
   end
 end

@@ -13,8 +13,12 @@ class Persistence
     false
   end
 
-  def save(id, val)
-    return @store.save_and_possibly_overwrite(id, val)
+  def save(id, val, overwrite=true)
+    if overwrite
+      return @store.save_and_possibly_overwrite(id, val)
+    else
+      return @store.save_if_nonexistent(id, val)
+    end
   end
 
   def get(id)

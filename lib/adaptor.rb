@@ -14,6 +14,5 @@ class RedisAdaptor
 
   def get(id)
     @redis.get(id)
-    #(true if @redis.get(id) == "OK") or false
   end
 end
