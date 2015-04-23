@@ -12,8 +12,9 @@ describe 'Redis Adaptor' do
   end
 
   it "breaks if item already set" do
-    expect(adaptor.save_and_possibly_overwrite('saving_something', 'hi')).to eq(true)
-    expect(adaptor.save_if_nonexistent('saving_something', 'oops')).to eq(false)
+    expect(adaptor.save_and_possibly_overwrite('once', 'hi')).to eq(true)
+    expect(adaptor.save_if_nonexistent('once', 'oops')).to eq(false)
+    expect(adaptor.get('once')).to eq('hi')
   end
 
   it "gets nonexistent values" do
